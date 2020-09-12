@@ -7,15 +7,38 @@ var choice1 = document.querySelector("#Choice1");
 var choice2 = document.querySelector("#Choice2");
 var choice3 = document.querySelector("#Choice3");
 var choice4 = document.querySelector("#Choice4");
+var choice5 = document.querySelector("#Choice5");
+var choice6 = document.querySelector("#Choice6");
+var choice7 = document.querySelector("#Choice7");
+var choice8 = document.querySelector("#Choice8");
+var choice9 = document.querySelector("#Choice9");
+var choice10 = document.querySelector("#Choice10");
+var choice11 = document.querySelector("#Choice11");
+var choice12 = document.querySelector("#Choice12");
+var choice13 = document.querySelector("#Choice13");
+var choice14 = document.querySelector("#Choice14");
+var choice15 = document.querySelector("#Choice15");
+var choice16 = document.querySelector("#Choice16");
 var horizontalBar = document.querySelector("#horizontalBar");
 var correctOrWrong = document.querySelector("#correctOrWrong");
-//create variables for every single choice button otherwise the score will be bugged out
 
 console.log("What up");
 choice1.style.display = "none";
 choice2.style.display = "none";
 choice3.style.display = "none";
 choice4.style.display = "none";
+choice5.style.display = "none";
+choice6.style.display = "none";
+choice7.style.display = "none";
+choice8.style.display = "none";
+choice9.style.display = "none";
+choice10.style.display = "none";
+choice11.style.display = "none";
+choice12.style.display = "none";
+choice13.style.display = "none";
+choice14.style.display = "none";
+choice15.style.display = "none";
+choice16.style.display = "none";
 
 //function to start the game when the button is clicked
 startButton.addEventListener("click", function() {
@@ -80,31 +103,39 @@ function startGame() {
 
 function secondQuestion() {
     myH1.textContent = "Pick B";
-    choice1.textContent = "A";
-    choice2.textContent = "B";
-    choice3.textContent = "C";
-    choice4.textContent = "D";
-    choice1.addEventListener("click", function()
+    choice1.style.display = "none";
+    choice5.textContent = "A";
+    choice5.style.display = "block";
+    choice2.style.display = "none";
+    choice6.textContent = "B";
+    choice6.style.display = "block";
+    choice3.style.display = "none";
+    choice7.textContent = "C";
+    choice7.style.display = "block";
+    choice4.style.display = "none";
+    choice8.textContent = "D";
+    choice8.style.display = "block";
+    choice5.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
         thirdQuestion();
     })
-    choice2.addEventListener("click", function()
+    choice6.addEventListener("click", function()
     {
         horizontalBar.style.display = "block";
         correctOrWrong.textContent = "Correct!";
         thirdQuestion();
     })
-    choice3.addEventListener("click", function()
+    choice7.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
         thirdQuestion();
     })
-    choice4.addEventListener("click", function()
+    choice8.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
@@ -114,40 +145,104 @@ function secondQuestion() {
 }
 
 function thirdQuestion () {
-    console.log("Third question");
     myH1.textContent = "Pick C";
-    choice1.textContent = "A";
-    choice2.textContent = "B";
-    choice3.textContent = "C";
-    choice4.textContent = "D";
-    choice1.addEventListener("click", function()
+    choice5.style.display = "none";
+    choice9.style.display = "block";
+    choice9.textContent = "A";
+    choice6.style.display = "none";
+    choice10.style.display = "block";
+    choice10.textContent = "B";
+    choice7.style.display = "none";
+    choice11.style.display = "block";
+    choice11.textContent = "C";
+    choice8.style.display = "none";
+    choice12.style.display = "block";
+    choice12.textContent = "D";
+    choice9.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
+        fourthQuestion();
     })
-    choice2.addEventListener("click", function()
+    choice10.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
+        fourthQuestion();
     })
-    choice3.addEventListener("click", function()
+    choice11.addEventListener("click", function()
     {
         horizontalBar.style.display = "block";
         correctOrWrong.textContent = "Correct!";
+        fourthQuestion();
     })
-    choice4.addEventListener("click", function()
+    choice12.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
+        fourthQuestion();
+    })
+}
+
+function fourthQuestion() {
+    myH1.textContent = "Pick D";
+    choice9.style.display = "none";
+    choice13.style.display = "block";
+    choice13.textContent = "A";
+    choice10.style.display = "none";
+    choice14.style.display = "block";
+    choice14.textContent = "B";
+    choice11.style.display = "none";
+    choice15.style.display = "block";
+    choice15.textContent = "C";
+    choice12.style.display = "none";
+    choice16.style.display = "block";
+    choice16.textContent = "D";
+    choice13.addEventListener("click", function()
+    {
+        score = score - 10;
+        horizontalBar.style.display = "block";
+        correctOrWrong.textContent = "Wrong!";
+        endGame();
+    })
+    choice14.addEventListener("click", function()
+    {
+        score = score - 10;
+        horizontalBar.style.display = "block";
+        correctOrWrong.textContent = "Wrong!";
+        endGame();
+    })
+    choice15.addEventListener("click", function()
+    {
+        score = score - 10;
+        horizontalBar.style.display = "block";
+        correctOrWrong.textContent = "Wrong!";
+        endGame();
+    })
+    choice16.addEventListener("click", function()
+    {
+        horizontalBar.style.display = "block";
+        correctOrWrong.textContent = "Correct!";
+        endGame();
     })
 }
 
 function endGame() {
+    console.log("End game");
+    //Need help stopping the interval here... it's undefined
+    clearInterval(scoreInterval);
+    choice13.style.display = "none";
+    choice14.style.display = "none";
+    choice15.style.display = "none";
+    choice16.style.display = "none";
+    horizontalBar.style.display = "none";
+    correctOrWrong.style.display = "none";
+    myH1.textContent = "Game over"
     myH2.style.display = "block";
-    myH1.textContent = "Game over";
+    myH2.textContent = "Score: " + score;
 }
 
 //function to subtract ten from the score every time a wrong button is clicked
