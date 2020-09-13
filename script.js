@@ -1,4 +1,7 @@
+//What's left: content, styling, and leaderboard
+
 var score = 100;
+var trueScore = 0;
 var scoreSpace = document.querySelector("#scoreSpace");
 var startButton = document.querySelector("#start");
 var myH1 = document.querySelector("h1");
@@ -21,28 +24,13 @@ var choice15 = document.querySelector("#Choice15");
 var choice16 = document.querySelector("#Choice16");
 var horizontalBar = document.querySelector("#horizontalBar");
 var correctOrWrong = document.querySelector("#correctOrWrong");
-
-console.log("What up");
-choice1.style.display = "none";
-choice2.style.display = "none";
-choice3.style.display = "none";
-choice4.style.display = "none";
-choice5.style.display = "none";
-choice6.style.display = "none";
-choice7.style.display = "none";
-choice8.style.display = "none";
-choice9.style.display = "none";
-choice10.style.display = "none";
-choice11.style.display = "none";
-choice12.style.display = "none";
-choice13.style.display = "none";
-choice14.style.display = "none";
-choice15.style.display = "none";
-choice16.style.display = "none";
+var nameInput = document.querySelector("#nameInput");
+var submitButton = document.querySelector("#submit");
 
 //function to start the game when the button is clicked
 startButton.addEventListener("click", function() {
     console.log("start");
+    score = 100;
     myH1.style.display = "none";
     myH2.style.display = "none";
     startButton.style.display = "none";
@@ -50,6 +38,7 @@ startButton.addEventListener("click", function() {
     choice2.style.display = "block";
     choice3.style.display = "block";
     choice4.style.display = "block";
+    scoreSpace.style.display = "block";
     startGame();
 })
 
@@ -232,28 +221,26 @@ function fourthQuestion() {
 
 function endGame() {
     console.log("End game");
-    //Need help stopping the interval here... it's undefined
-    clearInterval(scoreInterval);
+    trueScore = score;
+    scoreSpace.style.display = "none";
     choice13.style.display = "none";
     choice14.style.display = "none";
     choice15.style.display = "none";
     choice16.style.display = "none";
     horizontalBar.style.display = "none";
     correctOrWrong.style.display = "none";
-    myH1.textContent = "Game over"
+    myH1.textContent = "Game over";
     myH2.style.display = "block";
-    myH2.textContent = "Score: " + score;
+    myH2.textContent = "Score: " + trueScore;
+    startButton.style.display = "block";
+    startButton.textContent = "Play again?";
+    nameInput.style.display = "block";
+    submitButton.style.display = "block";
+    //Haven't learned how to make a leaderboard yet, so I've simply got the event set up to take the player's name for now
+    submitButton.addEventListener("click", function(event){
+        event.preventDefault();
+        console.log(event);
+        var response = nameInput.value;
+        myH1.textContent = "Thank you for playing. You are on the leaderboard, " + nameInput.value + "!";
+    })
 }
-
-//function to subtract ten from the score every time a wrong button is clicked
-
-//When the start button is clicked, the rest of the elements should disappear, and the first quiz question should appear
-
-//A timer of 100 seconds is the user's score
-//A quiz question should display over four buttons that are the "answers" to the question
-//When one button is clicked, the user should be told if they're correct or wrong underneath the buttons and the rest of the current page should be replaced with the next question
-//if the answer is incorrect, the timer/score should go down
-
-//When all questions have been answered, either correctly or incorrectly, a form for the user to input their name should be given
-//The user can then compare their score to a leaderboard of other scores
-//The user can also clear the high scores by pressing a button or they can play again

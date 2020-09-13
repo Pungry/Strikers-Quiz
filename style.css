@@ -5,3 +5,11 @@ body {
 #horizontalBar {
     display: none;
 }
+
+.choices {
+    display: none;
+}
+
+#nameInput {
+    display: none;
+}
