@@ -1,5 +1,6 @@
 body {
-    background-color: salmon;
+    background-image: url("https://i.pinimg.com/originals/41/88/a3/4188a3e47c023d188471d2e8060d707a.jpg");
+    color: red;
 }
 
 #horizontalBar {
@@ -58,4 +59,8 @@ form {
 
 h4 {
     text-align: center;
+}
+
+#leaderboard {
+    display: none;
 }

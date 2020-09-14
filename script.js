@@ -1,4 +1,4 @@
-//What's left: content, styling, and leaderboard
+//What's left: help on leaderboard, help with score function, help with local storage
 
 var score = 100;
 var trueScore = 0;
@@ -26,6 +26,9 @@ var horizontalBar = document.querySelector("#horizontalBar");
 var correctOrWrong = document.querySelector("#correctOrWrong");
 var nameInput = document.querySelector("#nameInput");
 var submitButton = document.querySelector("#submit");
+var leaderboardBoard = document.querySelector("#leaderboard");
+
+var leaderboard = [];
 
 //function to start the game when the button is clicked
 startButton.addEventListener("click", function() {
@@ -37,6 +40,7 @@ startButton.addEventListener("click", function() {
     startButton.style.display = "none";
     nameInput.style.display = "none";
     submitButton.style.display = "none";
+    leaderboardBoard.style.display = "none";
     choice1.style.display = "block";
     choice2.style.display = "block";
     choice3.style.display = "block";
@@ -59,11 +63,11 @@ function startGame() {
     }, 1000)
     //Here's the first question
     myH1.style.display = "block";
-    myH1.textContent = "Pick A";
-    choice1.textContent = "A";
-    choice2.textContent = "B";
-    choice3.textContent = "C";
-    choice4.textContent = "D";
+    myH1.textContent = "What is the objectively best combination of teams and sidekicks?";
+    choice1.textContent = "Daisy and Hammer Bros";
+    choice2.textContent = "Waluigi and Toads";
+    choice3.textContent = "Super Team";
+    choice4.textContent = "DK and Birdos";
     choice1.addEventListener("click", function()
     {
         horizontalBar.style.display = "block";
@@ -98,18 +102,18 @@ function startGame() {
 }
 
 function secondQuestion() {
-    myH1.textContent = "Pick B";
+    myH1.textContent = "What is objectively the best stadium to play in?";
     choice1.style.display = "none";
-    choice5.textContent = "A";
+    choice5.textContent = "The Palace";
     choice5.style.display = "block";
     choice2.style.display = "none";
-    choice6.textContent = "B";
+    choice6.textContent = "The Battle Dome";
     choice6.style.display = "block";
     choice3.style.display = "none";
-    choice7.textContent = "C";
+    choice7.textContent = "The Underground";
     choice7.style.display = "block";
     choice4.style.display = "none";
-    choice8.textContent = "D";
+    choice8.textContent = "Pipeline Central";
     choice8.style.display = "block";
     choice5.addEventListener("click", function()
     {
@@ -141,19 +145,19 @@ function secondQuestion() {
 }
 
 function thirdQuestion () {
-    myH1.textContent = "Pick C";
+    myH1.textContent = "What's objectively the most fun way to score?";
     choice5.style.display = "none";
     choice9.style.display = "block";
-    choice9.textContent = "A";
+    choice9.textContent = "Super Strike";
     choice6.style.display = "none";
     choice10.style.display = "block";
-    choice10.textContent = "B";
+    choice10.textContent = "One-timer off a perfect pass";
     choice7.style.display = "none";
     choice11.style.display = "block";
-    choice11.textContent = "C";
+    choice11.textContent = "Deking around Kritter";
     choice8.style.display = "none";
     choice12.style.display = "block";
-    choice12.textContent = "D";
+    choice12.textContent = "Charged shot from 30 yards away";
     choice9.addEventListener("click", function()
     {
         score = score - 10;
@@ -184,19 +188,19 @@ function thirdQuestion () {
 }
 
 function fourthQuestion() {
-    myH1.textContent = "Pick D";
+    myH1.textContent = "Why hasn't Nintendo remade Super Mario Strikers?";
     choice9.style.display = "none";
     choice13.style.display = "block";
-    choice13.textContent = "A";
+    choice13.textContent = "They hate money";
     choice10.style.display = "none";
     choice14.style.display = "block";
-    choice14.textContent = "B";
+    choice14.textContent = "They hate me";
     choice11.style.display = "none";
     choice15.style.display = "block";
-    choice15.textContent = "C";
+    choice15.textContent = "They hate society";
     choice12.style.display = "none";
     choice16.style.display = "block";
-    choice16.textContent = "D";
+    choice16.textContent = "It was an obscure 2005 game that nobody really bought nor does anyone continue to play considering the success of Mario Strikers Charged 2 years later";
     choice13.addEventListener("click", function()
     {
         score = score - 10;
@@ -243,11 +247,27 @@ function endGame() {
     startButton.textContent = "Play again?";
     nameInput.style.display = "block";
     submitButton.style.display = "block";
-    //Haven't learned how to make a leaderboard yet, so I've simply got the event set up to take the player's name for now
+    leaderboardBoard.style.display = "block";
     submitButton.addEventListener("click", function(event){
         event.preventDefault();
         console.log(event);
         var response = nameInput.value;
         myH1.textContent = "Thank you for playing. You are on the leaderboard, " + nameInput.value + "!";
+        //create new object of user of name and score, push it to the leaderboard array, store the list to local storage with JSON, sort the array as a list and dynamically create it
+        var newPlayer = {name: nameInput.value, score: trueScore};
+        leaderboard.push(newPlayer);
+        leaderboard.sort(function(a,b){return a.score < b.score});
+        //in theory, the below code should store the score locally but it doesn't work right now
+        // localStorage.setItem("scores", JSON.stringify(leaderboard));
+        // console.log(localStorage("scores"));
+        // var printItem = JSON.parse(localStorage.getItem("score"));
+
+        //prints out the leaderboard
+        for (var i = 0; i < leaderboard.length; i++)
+        {
+            var highScorePerson = document.createElement("li");
+            highScorePerson.textContent = leaderboard[i].name + " " + leaderboard[i].score;
+            leaderboardBoard.appendChild(highScorePerson);
+        }
     })
 }
