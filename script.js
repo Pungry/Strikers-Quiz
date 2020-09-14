@@ -31,9 +31,12 @@ var submitButton = document.querySelector("#submit");
 startButton.addEventListener("click", function() {
     console.log("start");
     score = 100;
+    trueScore = 100;
     myH1.style.display = "none";
     myH2.style.display = "none";
     startButton.style.display = "none";
+    nameInput.style.display = "none";
+    submitButton.style.display = "none";
     choice1.style.display = "block";
     choice2.style.display = "block";
     choice3.style.display = "block";
@@ -64,6 +67,7 @@ function startGame() {
     choice1.addEventListener("click", function()
     {
         horizontalBar.style.display = "block";
+        correctOrWrong.style.display = "block";
         correctOrWrong.textContent = "Correct!";
         secondQuestion();
     })
@@ -71,6 +75,7 @@ function startGame() {
     {
         score = score - 10;
         horizontalBar.style.display = "block";
+        correctOrWrong.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
         secondQuestion();
     })
@@ -78,6 +83,7 @@ function startGame() {
     {
         score = score - 10;
         horizontalBar.style.display = "block";
+        correctOrWrong.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
         secondQuestion();
     })
@@ -85,6 +91,7 @@ function startGame() {
     {
         score = score - 10;
         horizontalBar.style.display = "block";
+        correctOrWrong.style.display = "block";
         correctOrWrong.textContent = "Wrong!";
         secondQuestion();
     })

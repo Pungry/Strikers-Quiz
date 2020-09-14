@@ -6,10 +6,56 @@ body {
     display: none;
 }
 
-.choices {
+#nameInput {
     display: none;
 }
 
-#nameInput {
+#title {
+    text-align: center;
+}
+
+#instruction {
+    text-align: center;
+}
+
+#container {
+    width: 100vw;
+    align-content: center;
+}
+
+button {
+    position: relative;
+    left: 45vw;
+}
+
+.choices {
     display: none;
+    position: relative;
+    left: 50vw;
+}
+
+#scoreSpace {
+    display: none;
+    border: 5px solid red;
+    width: 10vw;
+    position: relative;
+    left: 90vw;
+    text-align: center;
+}
+
+form {
+    position: relative;
+    left: 45vw;
+    top: 20px;
+    align-content: center;
+}
+
+.submit {
+    position: relative;
+    left: 50vw;
+    float: left;
+}
+
+h4 {
+    text-align: center;
 }
