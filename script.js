@@ -1,5 +1,4 @@
-//What's left: help on leaderboard, help with score function, help with local storage
-
+var intervalBoolean = false;
 var score = 100;
 var trueScore = 0;
 var scoreSpace = document.querySelector("#scoreSpace");
@@ -29,6 +28,9 @@ var submitButton = document.querySelector("#submit");
 var leaderboardBoard = document.querySelector("#leaderboard");
 
 var leaderboard = [];
+
+var scores = JSON.parse(localStorage.getItem("scores"));
+console.log(scores);
 
 //function to start the game when the button is clicked
 startButton.addEventListener("click", function() {
@@ -68,14 +70,17 @@ function startGame() {
     choice2.textContent = "Waluigi and Toads";
     choice3.textContent = "Super Team";
     choice4.textContent = "DK and Birdos";
-    choice1.addEventListener("click", function()
+}
+//originally, each event listener was in a function, so things were getting cumulative on replay. Taking these eventListeners out of the functions has fixed it
+//Each event listener is looking for a click. On click, it tells the user if their answer was right or wrong, subtracts from the timer if wrong, and goes to the next question
+choice1.addEventListener("click", function()
     {
         horizontalBar.style.display = "block";
         correctOrWrong.style.display = "block";
         correctOrWrong.textContent = "Correct!";
         secondQuestion();
     })
-    choice2.addEventListener("click", function()
+choice2.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
@@ -83,7 +88,7 @@ function startGame() {
         correctOrWrong.textContent = "Wrong!";
         secondQuestion();
     })
-    choice3.addEventListener("click", function()
+choice3.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
@@ -91,7 +96,7 @@ function startGame() {
         correctOrWrong.textContent = "Wrong!";
         secondQuestion();
     })
-    choice4.addEventListener("click", function()
+choice4.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
@@ -99,7 +104,6 @@ function startGame() {
         correctOrWrong.textContent = "Wrong!";
         secondQuestion();
     })
-}
 
 function secondQuestion() {
     myH1.textContent = "What is objectively the best stadium to play in?";
@@ -115,7 +119,9 @@ function secondQuestion() {
     choice4.style.display = "none";
     choice8.textContent = "Pipeline Central";
     choice8.style.display = "block";
-    choice5.addEventListener("click", function()
+}
+
+choice5.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
@@ -142,7 +148,6 @@ function secondQuestion() {
         correctOrWrong.textContent = "Wrong!";
         thirdQuestion();
     })
-}
 
 function thirdQuestion () {
     myH1.textContent = "What's objectively the most fun way to score?";
@@ -158,7 +163,9 @@ function thirdQuestion () {
     choice8.style.display = "none";
     choice12.style.display = "block";
     choice12.textContent = "Charged shot from 30 yards away";
-    choice9.addEventListener("click", function()
+}
+
+choice9.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
@@ -185,7 +192,6 @@ function thirdQuestion () {
         correctOrWrong.textContent = "Wrong!";
         fourthQuestion();
     })
-}
 
 function fourthQuestion() {
     myH1.textContent = "Why hasn't Nintendo remade Super Mario Strikers?";
@@ -201,7 +207,9 @@ function fourthQuestion() {
     choice12.style.display = "none";
     choice16.style.display = "block";
     choice16.textContent = "It was an obscure 2005 game that nobody really bought nor does anyone continue to play considering the success of Mario Strikers Charged 2 years later";
-    choice13.addEventListener("click", function()
+}
+
+choice13.addEventListener("click", function()
     {
         score = score - 10;
         horizontalBar.style.display = "block";
@@ -228,9 +236,9 @@ function fourthQuestion() {
         correctOrWrong.textContent = "Correct!";
         endGame();
     })
-}
 
 function endGame() {
+    intervalBoolean = true;
     console.log("End game");
     trueScore = score;
     scoreSpace.style.display = "none";
@@ -248,26 +256,26 @@ function endGame() {
     nameInput.style.display = "block";
     submitButton.style.display = "block";
     leaderboardBoard.style.display = "block";
-    submitButton.addEventListener("click", function(event){
-        event.preventDefault();
-        console.log(event);
-        var response = nameInput.value;
-        myH1.textContent = "Thank you for playing. You are on the leaderboard, " + nameInput.value + "!";
-        //create new object of user of name and score, push it to the leaderboard array, store the list to local storage with JSON, sort the array as a list and dynamically create it
-        var newPlayer = {name: nameInput.value, score: trueScore};
-        leaderboard.push(newPlayer);
-        leaderboard.sort(function(a,b){return a.score < b.score});
-        //in theory, the below code should store the score locally but it doesn't work right now
-        // localStorage.setItem("scores", JSON.stringify(leaderboard));
-        // console.log(localStorage("scores"));
-        // var printItem = JSON.parse(localStorage.getItem("score"));
-
-        //prints out the leaderboard
-        for (var i = 0; i < leaderboard.length; i++)
-        {
-            var highScorePerson = document.createElement("li");
-            highScorePerson.textContent = leaderboard[i].name + " " + leaderboard[i].score;
-            leaderboardBoard.appendChild(highScorePerson);
-        }
-    })
 }
+
+submitButton.addEventListener("click", function(event){
+    event.preventDefault();
+    console.log(event);
+    var response = nameInput.value;
+    myH1.textContent = "Thank you for playing. You are on the leaderboard, " + nameInput.value + "!";
+    //creates new object of user of name and score, pushes it to the leaderboard array, stores the list to local storage with JSON
+    var newPlayer = {name: nameInput.value, score: trueScore};
+    scores.push(newPlayer);
+    //sorts the leaderboard from high to low
+    scores = scores.sort(function(a,b){return b.score - a.score});
+    localStorage.setItem("scores", JSON.stringify(scores));
+    var printItem = JSON.parse(localStorage.getItem("score"));
+
+    //prints out the leaderboard
+    for (var i = 0; i < 10; i++)
+    {
+        var highScorePerson = document.createElement("li");
+        highScorePerson.textContent = scores[i].name + " " + scores[i].score;
+        leaderboardBoard.appendChild(highScorePerson);
+    }
+})

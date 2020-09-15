@@ -32,7 +32,7 @@ button {
 .choices {
     display: none;
     position: relative;
-    left: 50vw;
+    left: 10vw;
 }
 
 #scoreSpace {
