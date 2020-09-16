@@ -27,8 +27,6 @@ var nameInput = document.querySelector("#nameInput");
 var submitButton = document.querySelector("#submit");
 var leaderboardBoard = document.querySelector("#leaderboard");
 
-var leaderboard = [];
-
 var scores = JSON.parse(localStorage.getItem("scores"));
 console.log(scores);
 
@@ -261,15 +259,14 @@ function endGame() {
 submitButton.addEventListener("click", function(event){
     event.preventDefault();
     console.log(event);
-    var response = nameInput.value;
     myH1.textContent = "Thank you for playing. You are on the leaderboard, " + nameInput.value + "!";
     //creates new object of user of name and score, pushes it to the leaderboard array, stores the list to local storage with JSON
     var newPlayer = {name: nameInput.value, score: trueScore};
+    scores = JSON.parse(localStorage.getItem("scores"));
     scores.push(newPlayer);
     //sorts the leaderboard from high to low
     scores = scores.sort(function(a,b){return b.score - a.score});
     localStorage.setItem("scores", JSON.stringify(scores));
-    var printItem = JSON.parse(localStorage.getItem("score"));
 
     //prints out the leaderboard
     for (var i = 0; i < 10; i++)
